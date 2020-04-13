@@ -1,6 +1,6 @@
-import { AudioDemo } from "./main-view-model";
+simport { AudioDemo } from './main-view-model';
 
-export function pageLoaded(args) {
+export function onNavigatedTo(args) {
   const page = args.object;
   page.bindingContext = new AudioDemo(page);
 }

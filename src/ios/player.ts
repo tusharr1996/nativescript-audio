@@ -221,7 +221,6 @@ export class TNSPlayer extends NSObject implements TNSPlayerI {
           this._player.replaceCurrentItemWithPlayerItem(null); // de-allocates the AVPlayer
           this._player = null;
         }
-
         resolve();
       } catch (ex) {
         TNS_Player_Log('dispose error', ex);
@@ -316,6 +315,10 @@ export class TNSPlayer extends NSObject implements TNSPlayerI {
 
   private _setIOSAudioSessionOutput() {
     const audioSession = AVAudioSession.sharedInstance();
+    audioSession.setCategoryWithOptionsError(
+      AVAudioSessionCategoryAmbient,
+      AVAudioSessionCategoryOptions.DuckOthers
+    );
     const output = audioSession.currentRoute.outputs.lastObject.portType;
     TNS_Player_Log('output', output);
 
